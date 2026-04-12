@@ -22,7 +22,8 @@ Installation for this should be similar to any other Unity editor tools you have
 Hovering over labels in the Editor Window should give you a description on what it is, otherwise the following may give you a clearer idea on what is going on.
 
 <p align="center">
-<img width="474" height="60" alt="image" src="https://github.com/user-attachments/assets/56414b95-40bb-4eb8-b8c3-9f553957e996" />
+   <img width="474" height="60" alt="image" src="https://github.com/user-attachments/assets/c370d007-2f36-4e5c-b0f7-89635534443c" />
+   
 </p>
 
 | Label  | Description |
@@ -32,7 +33,7 @@ Hovering over labels in the Editor Window should give you a description on what 
 | Refresh | This refreshes the list of bindings on the list. The script does not automatically refresh. It refreshes under two cases: renaming, and the click of this button. |
 
 <p align="center">
-<img width="474" height="52" alt="image" src="https://github.com/user-attachments/assets/cf53db63-ae82-4385-b271-783e61513a09" />
+   <img width="474" height="52" alt="image" src="https://github.com/user-attachments/assets/494b1a73-660c-4ee5-9a1a-b9a8af044a36" />
 </p>
 
 | Label  | Description |
@@ -41,7 +42,7 @@ Hovering over labels in the Editor Window should give you a description on what 
 | Replace  | Using the path given, it will replace the binding with a new binding, with the same values, with the new filepath. |
 
 <p align="center">
-<img width="474" height="71" alt="image" src="https://github.com/user-attachments/assets/8bf8cf54-1938-4134-bf12-339590630cd3" />
+   <img width="474" height="61" alt="image" src="https://github.com/user-attachments/assets/eee2ed00-385d-4a95-b13b-893ae9cee1d0" />
 </p>
 
 | Label  | Description |
