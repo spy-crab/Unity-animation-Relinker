@@ -9,6 +9,7 @@ To fix this you can manually rename every binding, but this quickly adds up acro
    - Individual renaming
    - Find and replace.
 
+### Let me know if you have any feedback, or run into issues. If you found the tool useful please give the repository a star!
 
 ## Installation
 Installation for this should be similar to any other Unity editor tools you have installed. 
