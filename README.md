@@ -5,6 +5,8 @@ To fix this you can manually rename every binding, but this quickly adds up acro
 
    I started this tool to dip my toes into Unity Editor Window scripting, before attempting my [Constraints tool.](https://github.com/spy-crab/Unity-animation-Constraints)
 
+### [Download the latest release](https://github.com/spy-crab/Unity-animation-Relinker/releases/latest)
+
 **Complete feature list:**
    - Individual renaming
    - Find and replace.
