@@ -35,6 +35,10 @@ Hovering over labels in the Editor Window should give you a description on what 
 | Root Scene Object | This is the object at the top of the hierarchy that holds the animation data. **It is important that you put the correct object in here**, otherwise the script will grab every binding available, and find and replace may break otherwise non-broken keys. If you wish to edit all keys, even valid ones, then putting any object other than the root object will give you that ability, however it may not work as intended-- use with caution.  |
 | Refresh | This refreshes the list of bindings on the list. The script does not automatically refresh. It refreshes under two cases: renaming, and the click of this button. |
 
+> [!NOTE]
+> The object that holds the Animator shouldn't contain any animation data, Unity does not give those bindings paths, which may cause the tool to detect them as ghost names. For best results: The parent object is the Root scene object, which contains the Animator.
+
+
 <p align="center">
    <img width="474" height="52" alt="image" src="https://github.com/user-attachments/assets/494b1a73-660c-4ee5-9a1a-b9a8af044a36" />
 </p>
