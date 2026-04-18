@@ -1,4 +1,7 @@
+<img width="239" height="127" alt="ReLinker png" src="https://github.com/user-attachments/assets/941f954c-7a42-413f-b7d8-753306b45343" />
+
 # Relinker [Ver. 0.1]
+
 The Relinker is a tool to fix already broken animation links. Broken animation links in Unity are defined by their characteristic yellow tint, but complete animation data. This is caused by a change in the hierarchy, which breaks the file path connections that the animations were built off of. 
 
 To fix this you can manually rename every binding, but this quickly adds up across dozens of characters, complex rigs, and complex animations. The Relinker looks for invalid paths within a given animation controller, and gives the user the option of manually renaming individual bindings, or mass renaming using 'find' and 'replace'.  You can use the tool without opening your prefabs, letting you quickly check the validity of your animation clips, and fix issues. 
@@ -12,6 +15,14 @@ To fix this you can manually rename every binding, but this quickly adds up acro
    - Find and replace.
 
 ### Let me know if you have any feedback, or run into issues. If you found the tool useful please give the repository a star!
+
+<p align="center">
+   
+# Video
+   
+[![Video](https://img.youtube.com/vi/dterXoDLIYk/0.jpg)](https://www.youtube.com/watch?v=dterXoDLIYk)
+
+</p>
 
 ## Installation
 Installation for this should be similar to any other Unity editor tools you have installed. 
