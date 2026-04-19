@@ -200,7 +200,7 @@ public class Rel_Window : EditorWindow
 
 
         //should this be dismissable?
-        EditorGUILayout.HelpBox("Version 0.1 - Early Access | Send feedback on GitHub ", MessageType.Info);
+        EditorGUILayout.HelpBox("Version 0.2 - Early Access | Send feedback on GitHub ", MessageType.Info);
 
     }
 

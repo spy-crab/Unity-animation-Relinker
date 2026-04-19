@@ -131,6 +131,7 @@ public static class Rel_Manual
         finally
         {
             AssetDatabase.StopAssetEditing();
+            GUI.FocusControl(""); //prevents textfield from showing old data
         }
         //only scan once we do everything.
         if (controller != null && root != null)
@@ -241,6 +242,8 @@ public static class Rel_Manual
             }
 
         }
+        GUI.FocusControl("");  //prevents textfield from showing old data
+
     }
 
 
