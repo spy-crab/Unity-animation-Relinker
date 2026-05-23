@@ -40,6 +40,7 @@ public static class AniTransfer
 
     /*
      * Populate source data wiht information we need to transfer
+     * TODO: rethink this one
      */
     public static void populateSourceData(AnimatorController controller) 
     {
@@ -116,8 +117,7 @@ public static class AniTransfer
          * add suffix y/x
          * final anim files add those.
          * anim ctrl set name.
-         * copy anim data.
-         * assign anim files
+         * re-assign anim files
          */
 
         /*
@@ -127,16 +127,14 @@ public static class AniTransfer
          * rename files, and then add them to the designated path.
          * controller, reassign clips to new ones.
          * 
-         * root object -- controller component added, assigned
-         * 
          */
 
         //Debug.Log(folderPath);
         AnimatorController newController = new AnimatorController();
 
         //TODO populate with data
-
-        AssetDatabase.CreateAsset(newController, folderPath+"/"+newName+".controller");
+        AssetDatabase.CopyAsset(AssetDatabase.GetAssetPath(controller), folderPath + "/" + newName + ".controller");
+        //AssetDatabase.CreateAsset(newController, folderPath+"/"+newName+".controller");
         Debug.Log(AssetDatabase.GetAssetPath(newController)); 
 
     }
