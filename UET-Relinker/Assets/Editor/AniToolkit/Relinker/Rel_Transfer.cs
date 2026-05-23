@@ -41,8 +41,15 @@ public static class AniTransfer
     /*
      * Populate source data wiht information we need to transfer
      */
-    public static void populateSourceData(AnimatorController controller)
+    public static void populateSourceData(AnimatorController controller) 
     {
+        /*TODO, research https://docs.unity3d.com/ScriptReference/Animations.AnimatorController.html
+         * Animation controller data is stored as such:
+         * layers[index]. stateMachine.states[index]
+         * 
+         * clips will be stored as a string reference in layers[i].stateMachine.states[b].state.name ?
+         */
+
         clearSourceData();
         var sourceProperties = new sourceAnimationData();
 
@@ -57,14 +64,18 @@ public static class AniTransfer
 
             sourceData.Add(sourceProperties);
 
-            //sourceData.Add(clip);
-            //(EditorCurveBinding binding in clip.bindin)
-            
-            //Debug.Log(clip.name); // verified
 
         }
 
 
+    }
+
+    public static void processAnimationController()// it might be easier to copy the file and then edit the contents??? //https://docs.unity3d.com/6000.0/Documentation/ScriptReference/AssetDatabase.CopyAsset.html
+    {
+        /*The thought is. grabbing the blank anim controller, we grab the source data we copied. into the new controller
+         * with new names, and everything..
+         * will get there eventually
+         */
     }
 
 
@@ -76,9 +87,28 @@ public static class AniTransfer
         sourceData.Clear();
 
     }
+    
+    public static void prefixString(string prefix)
+    {
+        /*TODO::
+         * if this is called,
+         * for every animation clip, create a new clip with the new name,
+         * and then transfer over data.. i assume i cannot just rename it
+         * then finally, create the files in the folders. or maybe transfer over data afterwards? whatever is easier..
+         */
+    }
 
+    public static void suffixString (string suffix)
+    {
+        /*TODO::
+         * if this is called,
+         * for every animation clip, create a new clip with the new name,
+         * and then transfer over data.. i assume i cannot just rename it
+         * then finally, create the files in the folders. or maybe transfer over data afterwards? whatever is easier..
+         */
+    }
 
-    public static void transferController(AnimatorController controller, string folderPath, GameObject root, string newName)
+    public static void transferController(AnimatorController controller, string folderPath, string newName)
     {
 
         /*Get users input on what the output name will be.
@@ -101,11 +131,13 @@ public static class AniTransfer
          * 
          */
 
-        //how to create an object? / copy file? //https://docs.unity3d.com/6000.0/Documentation/ScriptReference/AssetDatabase.CreateAsset.html
-        Debug.Log(folderPath);
-        AnimatorController newController = new AnimatorController(); //TODO populate with data
+        //Debug.Log(folderPath);
+        AnimatorController newController = new AnimatorController();
+
+        //TODO populate with data
+
         AssetDatabase.CreateAsset(newController, folderPath+"/"+newName+".controller");
-        Debug.Log(AssetDatabase.GetAssetPath(newController)); //WRONG PATH!!!
+        Debug.Log(AssetDatabase.GetAssetPath(newController)); 
 
     }
 

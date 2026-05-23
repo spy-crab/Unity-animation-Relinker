@@ -24,19 +24,23 @@ public class Rel_Window : EditorWindow
         window.Show();
 
     }
-
-    //MANUAL
+    
+    #region MANUAL
     private AnimatorController selectedController; //the controller the user has inputted to check for invalid bindings
     private GameObject rootObject; //Scene object containing the Animator
     //FIND AND REPLACE VARS
     private string findPath = ""; //the string to look for
     private string replacePath = ""; //the string to replace the 'found'
+    #endregion MANUAL
 
-    //AUTOMATIC - TODO, after transfer. 
+    #region AUTO
+    //TODO, after transfer. 
     private AnimatorController targetAnim;
-    private AnimatorController sourceAnim; 
+    private AnimatorController sourceAnim;
+    #endregion AUTO
 
-    //TRANSFER - TODO
+    #region TRANSFER
+    //TODO
     private AnimatorController controllerToTransfer;
     private GameObject rootToInheritInfo;
     private string pathToTarget;
@@ -44,9 +48,10 @@ public class Rel_Window : EditorWindow
     private string newControllerName="AnimationController";
     private bool appendString;
     private bool suffixString;
+    #endregion TRANSFER
 
 
-
+    #region EDITOR WINDOW VARS
     //EDITOR WINDOW VARIABLES -- not used in any scripts
     private Vector2 scrollPos; //for scrolling the binding list
     private bool collapseAll = false; //why the error
@@ -54,6 +59,7 @@ public class Rel_Window : EditorWindow
     private bool hasBeenEdited = false; //essentually used to check if collapseAll has been enabled, and if so, go through all of them, then mark this as edited. when edited, collapseall is false again.
     private int toolbarInt = 0; //for future 
     private string[] toolbarStrings = { "Manual", "Auto",  "Transfer"}; //for future
+    #endregion EDITOR WINDOW VARS
 
     private void OnGUI()
     {
@@ -206,6 +212,9 @@ public class Rel_Window : EditorWindow
                 //not actually automatic, but i want to try something. not immportant/as useful as transfer.
                 break;
 
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///
+
             //Transfer lets the user transfer animation data without messing with broken clips to begin with.
             case 2: //Transfer
                 EditorGUILayout.LabelField("Transfer [UNFINISHED FEATURE!]", EditorStyles.boldLabel);
@@ -217,8 +226,8 @@ public class Rel_Window : EditorWindow
                 //TODO: add hover information/ info below 
                 controllerToTransfer = (AnimatorController)EditorGUILayout.ObjectField("Animator Controller", controllerToTransfer, typeof(AnimatorController), false);//does not come from the scene, searches project files
 
-                EditorGUILayout.Space();
-                rootToInheritInfo = (GameObject)EditorGUILayout.ObjectField("Root Scene Object", rootToInheritInfo, typeof(GameObject), true);//searches the scene //PERHAPS CHANGE THIS?
+                //EditorGUILayout.Space();
+                //rootToInheritInfo = (GameObject)EditorGUILayout.ObjectField("Root Scene Object", rootToInheritInfo, typeof(GameObject), true);//searches the scene //PERHAPS CHANGE THIS?
 
                 EditorGUILayout.Space();
 
@@ -246,12 +255,12 @@ public class Rel_Window : EditorWindow
 
                 EditorGUILayout.Space();
 
-                EditorGUI.BeginDisabledGroup(!(controllerToTransfer != null && rootToInheritInfo != null && newControllerName!=null && pathToTarget!= null)); //must have a controller to transfer, root object to copy,  a name assigned, and a path
+                EditorGUI.BeginDisabledGroup(!(controllerToTransfer != null && newControllerName!=null && pathToTarget!= null)); //must have a controller to transfer, root object to copy,  a name assigned, and a path
                 if (GUILayout.Button("Transfer")) 
                 {
                     AniTransfer.clearSourceData();
                     AniTransfer.populateSourceData(controllerToTransfer);
-                    AniTransfer.transferController(controllerToTransfer, pathToTarget, rootToInheritInfo, newControllerName); //TODO -- unsure if i want  to keep these parametesrs.
+                    AniTransfer.transferController(controllerToTransfer, pathToTarget, newControllerName); //TODO -- unsure if i want  to keep these parametesrs.
                     //TODO: create function to copy files, and rename appropriately to new root.
                     //https://docs.unity3d.com/6000.0/Documentation/ScriptReference/FileUtil.CopyFileOrDirectory.html
                     //https://discussions.unity.com/t/how-do-i-get-a-list-of-filenames-in-a-resources-folder/71415
@@ -260,6 +269,8 @@ public class Rel_Window : EditorWindow
 
 
                 EditorGUI.EndDisabledGroup();
+
+                //TODO: warnings for why you cannot transfer, ex. missing variable.
 
 
                 break;
