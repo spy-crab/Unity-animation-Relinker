@@ -232,7 +232,7 @@ public class Rel_Window : EditorWindow
                 if (GUILayout.Button("Select destination folder"))
                 {
                     //pathToTarget = EditorUtility.OpenFilePanel("Select folder to place animation files in", "", "");
-                    string absPath = EditorUtility.OpenFolderPanel("Select folder to place animation files in", "", "");
+                    string absPath = EditorUtility.OpenFolderPanel("Select folder to place animation files in", "Assets", "");
                     pathToTarget = absPath.Substring(absPath.IndexOf("Assets/"));
                 }
 
@@ -249,13 +249,9 @@ public class Rel_Window : EditorWindow
                 EditorGUI.BeginDisabledGroup(!(controllerToTransfer != null && rootToInheritInfo != null && newControllerName!=null && pathToTarget!= null)); //must have a controller to transfer, root object to copy,  a name assigned, and a path
                 if (GUILayout.Button("Transfer")) 
                 {
-                    //GUI.FocusControl(""); //ensures any textbox is updated/not selected.
                     AniTransfer.clearSourceData();
-                    //Debug.Log("what");
                     AniTransfer.populateSourceData(controllerToTransfer);
-                    //Debug.Log("how");
                     AniTransfer.transferController(controllerToTransfer, pathToTarget, rootToInheritInfo, newControllerName); //TODO -- unsure if i want  to keep these parametesrs.
-                    //Debug.Log("im Here");
                     //TODO: create function to copy files, and rename appropriately to new root.
                     //https://docs.unity3d.com/6000.0/Documentation/ScriptReference/FileUtil.CopyFileOrDirectory.html
                     //https://discussions.unity.com/t/how-do-i-get-a-list-of-filenames-in-a-resources-folder/71415

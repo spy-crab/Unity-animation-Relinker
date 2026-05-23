@@ -102,32 +102,9 @@ public static class AniTransfer
          */
 
         //how to create an object? / copy file? //https://docs.unity3d.com/6000.0/Documentation/ScriptReference/AssetDatabase.CreateAsset.html
-        //new AnimatorController test = controller;
-
-        //string controllerPath = AssetDatabase.GetAssetPath(controller);
-        //Debug.Log(controllerPath);
-
-        ////separate this out into its own method. Also i dont think this is necessary anymore, on second thought people will likely already have a folder made, they arent expecting a folder rename
-        //string newController = "";
-        //for (int i = controllerPath.Length-1; i > 0; i--) // surely there is a better way to do this??
-        //{
-        //    if (controllerPath[i] == '/') // we have reached the folder name -- ABORT!
-        //    {
-
-        //        break;
-        //    }
-        //    newController = controllerPath[i] + newController;
-
-        //}
-        ////Debug.Log(oldRootName);
-
-        //string newControllerPath = controllerPath.Replace(newController, newName);
-        //Debug.Log(newControllerPath);
-        //Debug.Log("inside");
-        AnimatorController newController = new AnimatorController();
-        //Debug.Log("new");
-        AssetDatabase.CreateAsset(newController, folderPath+".controller");
-        //Debug.Log("created");
+        Debug.Log(folderPath);
+        AnimatorController newController = new AnimatorController(); //TODO populate with data
+        AssetDatabase.CreateAsset(newController, folderPath+"/"+newName+".controller");
         Debug.Log(AssetDatabase.GetAssetPath(newController)); //WRONG PATH!!!
 
     }
