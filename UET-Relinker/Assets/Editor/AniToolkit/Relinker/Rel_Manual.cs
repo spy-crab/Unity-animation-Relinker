@@ -34,13 +34,13 @@ public static class Rel_Manual
             if (clip == null) continue;
 
             // Float/transform curves
-            var floatCurves = AnimationUtility.GetCurveBindings(clip);
-            foreach (var binding in floatCurves)
+            EditorCurveBinding[] floatCurves = AnimationUtility.GetCurveBindings(clip);
+            foreach (EditorCurveBinding binding in floatCurves)
                 CheckBinding(binding, clip, root);
 
             // Object reference curves
-            var objectCurves = AnimationUtility.GetObjectReferenceCurveBindings(clip);
-            foreach (var binding in objectCurves)
+            EditorCurveBinding[] objectCurves = AnimationUtility.GetObjectReferenceCurveBindings(clip);
+            foreach (EditorCurveBinding binding in objectCurves)
                 CheckBinding(binding, clip, root);
         }
     }
@@ -63,7 +63,7 @@ public static class Rel_Manual
             return;
         }
         //check the HashSet for the first entry where property.oldpath = binding.path and return it in that var.
-        var sharedProperty = invalidProperties.FirstOrDefault(property => property.oldPath == binding.path);
+        InvalidSharedProperty sharedProperty = invalidProperties.FirstOrDefault(property => property.oldPath == binding.path);
         if (sharedProperty == null) //dont have a list of all the bindings + info? make it.
         {
             sharedProperty = new InvalidSharedProperty();
@@ -100,7 +100,7 @@ public static class Rel_Manual
         {
             AssetDatabase.StartAssetEditing();
 
-            foreach (var sharedProperty in propertiesToProcess)
+            foreach (InvalidSharedProperty sharedProperty in propertiesToProcess)
             {
                 //for every clip in the aniomation, and every animation in the controller
                 foreach (AnimationClip clip in sharedProperty.foldoutClips)
@@ -108,18 +108,18 @@ public static class Rel_Manual
                     if (clip == null)
                     {
                         continue; //skips past. 
-                    }     
+                    }
                     // Float/transform curves
-                    var floatCurves = AnimationUtility.GetCurveBindings(clip);
-                    foreach (var binding in floatCurves)
+                    EditorCurveBinding[] floatCurves = AnimationUtility.GetCurveBindings(clip);
+                    foreach (EditorCurveBinding binding in floatCurves)
                     {
                         ReplaceBindingPath(binding, clip, oldPath, newPath, replaceAll, root);
                         EditorUtility.SetDirty(clip); //prompt user to save
 
                     }
                     // Object reference curves
-                    var objectCurves = AnimationUtility.GetObjectReferenceCurveBindings(clip);
-                    foreach (var binding in objectCurves)
+                    EditorCurveBinding[] objectCurves = AnimationUtility.GetObjectReferenceCurveBindings(clip);
+                    foreach (EditorCurveBinding binding in objectCurves)
                     {
                         ReplaceBindingPath(binding, clip, oldPath, newPath, replaceAll, root);
                         EditorUtility.SetDirty(clip); //prompt user to save

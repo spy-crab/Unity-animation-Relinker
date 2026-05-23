@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="Assets\Editor\AniToolkit\Relinker\Rel_Manual.cs" />
     <Compile Include="Assets\Editor\AniToolkit\Relinker\Rel_Window.cs" />
+    <Compile Include="Assets\Editor\AniToolkit\Relinker\Rel_Transfer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

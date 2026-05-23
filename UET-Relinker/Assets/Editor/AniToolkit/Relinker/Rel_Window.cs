@@ -1,4 +1,5 @@
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
@@ -31,7 +32,7 @@ public class Rel_Window : EditorWindow
     private string findPath = ""; //the string to look for
     private string replacePath = ""; //the string to replace the 'found'
 
-    //AUTOMATIC - TODO
+    //AUTOMATIC - TODO, after transfer. 
     private AnimatorController targetAnim;
     private AnimatorController sourceAnim; 
 
@@ -39,6 +40,10 @@ public class Rel_Window : EditorWindow
     private AnimatorController controllerToTransfer;
     private GameObject rootToInheritInfo;
     private string pathToTarget;
+    //TODO
+    private string newControllerName="AnimationController";
+    private bool appendString;
+    private bool suffixString;
 
 
 
@@ -48,17 +53,17 @@ public class Rel_Window : EditorWindow
     private bool openAll = false; //there is probably a better way but i dont know currently.
     private bool hasBeenEdited = false; //essentually used to check if collapseAll has been enabled, and if so, go through all of them, then mark this as edited. when edited, collapseall is false again.
     private int toolbarInt = 0; //for future 
-    private string[] toolbarStrings = { "Manual" }; //for future
+    private string[] toolbarStrings = { "Manual", "Auto",  "Transfer"}; //for future
 
     private void OnGUI()
     {
         EditorGUILayout.BeginHorizontal(); //toolbar, help
         toolbarInt = GUILayout.Toolbar(toolbarInt, toolbarStrings);
         GUILayout.Space(200);
-        GUIContent contentHelp = new GUIContent("Help", "https://github.com/spy-crab/Unity-animation-Relinker"); //TODO change lol
+        GUIContent contentHelp = new GUIContent("Help", "https://github.com/spy-crab/Unity-animation-Relinker"); 
         if (GUILayout.Button(contentHelp, GUILayout.Width(50)))
         {
-            Application.OpenURL("https://github.com/spy-crab/Unity-animation-Relinker"); //temporary
+            Application.OpenURL("https://github.com/spy-crab/Unity-animation-Relinker");
         }
         EditorGUILayout.EndHorizontal(); //toolbar, help
 
@@ -140,7 +145,7 @@ public class Rel_Window : EditorWindow
                         if (GUILayout.Button("Replace"))
                         {
                             //replace
-                            Rel_Manual.ReplacePathInClips(sharedProperty.oldPath, sharedProperty.newPath, selectedController, rootObject, true); //TODO: overload so you dont need the root object pls
+                            Rel_Manual.ReplacePathInClips(sharedProperty.oldPath, sharedProperty.newPath, selectedController, rootObject, true); 
 
                             //removes fixed path from ui
                             Rel_Manual.ScanInvalidPaths(selectedController, rootObject);
@@ -196,6 +201,72 @@ public class Rel_Window : EditorWindow
 
                 break;
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///
+            case 1:
+                //not actually automatic, but i want to try something. not immportant/as useful as transfer.
+                break;
+
+            //Transfer lets the user transfer animation data without messing with broken clips to begin with.
+            case 2: //Transfer
+                EditorGUILayout.LabelField("Transfer [UNFINISHED FEATURE!]", EditorStyles.boldLabel);
+                EditorGUILayout.TextArea("Copy a controller, and it's animations to a new file. \n " +
+                    "For the best results please ensure that your bone heirarchy follows the same structure and naming convention, otherwise switch to Manual to fix edge cases", EditorStyles.boldLabel);
+
+
+                GUILayout.BeginHorizontal();
+                //TODO: add hover information/ info below 
+                controllerToTransfer = (AnimatorController)EditorGUILayout.ObjectField("Animator Controller", controllerToTransfer, typeof(AnimatorController), false);//does not come from the scene, searches project files
+
+                EditorGUILayout.Space();
+                rootToInheritInfo = (GameObject)EditorGUILayout.ObjectField("Root Scene Object", rootToInheritInfo, typeof(GameObject), true);//searches the scene //PERHAPS CHANGE THIS?
+
+                EditorGUILayout.Space();
+
+
+                GUILayout.EndHorizontal();
+
+                EditorGUILayout.Space();
+
+                GUILayout.BeginHorizontal();
+
+                if (GUILayout.Button("Select destination folder"))
+                {
+                    //pathToTarget = EditorUtility.OpenFilePanel("Select folder to place animation files in", "", "");
+                    string absPath = EditorUtility.OpenFolderPanel("Select folder to place animation files in", "", "");
+                    pathToTarget = absPath.Substring(absPath.IndexOf("Assets/"));
+                }
+
+                EditorGUILayout.LabelField(pathToTarget, EditorStyles.label); //figure out a way to simplify this?
+
+                GUILayout.EndHorizontal();
+                newControllerName = EditorGUILayout.TextField("Controller name", newControllerName);
+
+                //TODO: append / suffix
+
+
+                EditorGUILayout.Space();
+
+                EditorGUI.BeginDisabledGroup(!(controllerToTransfer != null && rootToInheritInfo != null && newControllerName!=null && pathToTarget!= null)); //must have a controller to transfer, root object to copy,  a name assigned, and a path
+                if (GUILayout.Button("Transfer")) 
+                {
+                    //GUI.FocusControl(""); //ensures any textbox is updated/not selected.
+                    AniTransfer.clearSourceData();
+                    //Debug.Log("what");
+                    AniTransfer.populateSourceData(controllerToTransfer);
+                    //Debug.Log("how");
+                    AniTransfer.transferController(controllerToTransfer, pathToTarget, rootToInheritInfo, newControllerName); //TODO -- unsure if i want  to keep these parametesrs.
+                    //Debug.Log("im Here");
+                    //TODO: create function to copy files, and rename appropriately to new root.
+                    //https://docs.unity3d.com/6000.0/Documentation/ScriptReference/FileUtil.CopyFileOrDirectory.html
+                    //https://discussions.unity.com/t/how-do-i-get-a-list-of-filenames-in-a-resources-folder/71415
+
+                }
+
+
+                EditorGUI.EndDisabledGroup();
+
+
+                break;
         }
 
 
