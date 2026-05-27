@@ -184,10 +184,10 @@ public class Rel_Window : EditorWindow
                     {   //you cant find nothin!
                         EditorUtility.DisplayDialog("Error", "Please enter a path to find.", "OK");
                     }
-                    else if (string.IsNullOrEmpty(replacePath))
-                    {   //you cant replace nothin! that would break things
-                        EditorUtility.DisplayDialog("Error", "Please enter a replacement path.", "OK");
-                    }
+                    //else if (string.IsNullOrEmpty(replacePath))
+                    //{   
+                    //    EditorUtility.DisplayDialog("Error", "Please enter a replacement path.", "OK");
+                    //}
                     else if (rootObject == null)
                     {   //... shouldnt be possible but this is old code
                         EditorUtility.DisplayDialog("Error", "Please assign a root scene object.", "OK");

@@ -12,9 +12,6 @@ using UnityEditor.Animations;
 
 public static class AniTransfer
 {
-
-
-
     /*
      * This method grabs the controller and copies it, and it's associated clips to the path given.
      * Helper method to rename the file names perhaps?
@@ -24,7 +21,7 @@ public static class AniTransfer
     //to store the clips.
     
 
-    public class sourceAnimationData
+    public class sourceAnimationData //TODO: rethink this
     {
         public HashSet<AnimationClip> animationClips = new HashSet<AnimationClip>();
         public string oldPath;
